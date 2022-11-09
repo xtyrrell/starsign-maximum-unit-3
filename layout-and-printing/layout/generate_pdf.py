@@ -35,7 +35,7 @@ def get_image_position(identifier):
     # TODO: Ruby & Max populate this
     image_positions = {
         'http://localhost:3000/images/Frazier-Bunny-Rabbits.webp': (12 * mm, 150 * mm),
-        'http://localhost:3000/images/chess_table.png': (90 * mm, 90 * mm)
+        # 'http://localhost:3000/images/chess_table.png': (90 * mm, 90 * mm)
     }
 
     return image_positions.get(identifier, None)
