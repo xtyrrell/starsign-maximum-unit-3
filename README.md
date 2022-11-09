@@ -13,8 +13,8 @@
 
 watching
 
-- [ ] watch an event logs folder and whenever one appears, generate a PDF of it and place that in the PDFs folder, then rename it `.old`
-- [ ] watch a PDFs folder and whenever one appears, print it then rename it `.old`
+- [x] watch an event logs folder and whenever one appears, generate a PDF of it and place that in the PDFs folder, then rename it `.old`
+- [x] watch a PDFs folder and whenever one appears, print it then rename it `.old`
 
 ### Work to do
 
