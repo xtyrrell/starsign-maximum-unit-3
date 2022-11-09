@@ -24,10 +24,11 @@ watching
 
 Dependencies
 
-- (don't think this is necessary anymore) sh (`$ pip install sh`)
+- Python 3
 - reportlab (`$ pip install reportlab`)
 - homebrew (`$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`)
 - watchman (`$ brew install watchman`)
+- Python requests (`$ pip install requests`)
 
 ## Setup watcher for downloads folder
 
