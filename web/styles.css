@@ -1,0 +1,36 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  max-width: 800px;
+  align-items: space-around;
+  gap: 50px;
+}
+
+.columns .stack {
+  text-align: center;
+}
+
+.columns img {
+  width: 200px;
+  height: 200px;
+}
+
+.div-image {
+  width: 200px;
+  height: 200px;
+  background-position: 0 0 0 0;
+}
+
+.stack img.clickable {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
