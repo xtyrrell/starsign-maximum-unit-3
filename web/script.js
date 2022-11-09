@@ -40,6 +40,18 @@ window.addEventListener("pageshow", (event) => {
   }
 });
 
+/**
+ * Downloads the event log when you go to a page containing `download` in the path.
+ */
+window.addEventListener("pageshow", (event) => {
+  if (document.location.pathname.includes("download")) {
+    console.log("YOU ARE ON THE DOWNLOAD PAGE! Downloading events");
+    const filename = "events.json";
+    const text = localStorage.getItem("events");
+    download(filename, text);
+  }
+});
+
 // Make download buttons download
 [...document.querySelectorAll("button.download-events")].forEach(
   (clickable) => {
@@ -51,9 +63,26 @@ window.addEventListener("pageshow", (event) => {
   }
 );
 
+// Make next buttons work properly
+[...document.querySelectorAll("a.next")].forEach((clickable) => {
+  clickable.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    goToNextPage();
+  });
+});
+
 // =================
 // === utilities ===
 // =================
+
+function goToNextPage() {
+  const currentPageStr = window.location.pathname
+    .replace("/", "")
+    .split(".")[0];
+  const currentPage = parseInt(currentPageStr);
+  window.location = currentPage + 1 + ".html";
+}
 
 function download(filename, text) {
   var element = document.createElement("a");
