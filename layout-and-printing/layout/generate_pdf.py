@@ -23,22 +23,11 @@ def draw_image_event(event):
     file_path = path.join(gettempdir(), filename)
     image_path = streaming_download_file(url, file_path)
 
-    x, y = get_image_position(url) or generate_random_image_position(
-        IMAGE_WIDTH, IMAGE_HEIGHT)
+    x, y = generate_random_image_position(IMAGE_WIDTH, IMAGE_HEIGHT)
 
     c.drawImage(image=image_path, x=x, y=y, width=IMAGE_WIDTH,
                 height=IMAGE_HEIGHT, preserveAspectRatio=True,
                 mask='auto')
-
-
-def get_image_position(identifier):
-    # TODO: Ruby & Max populate this
-    image_positions = {
-        'http://localhost:3000/images/Frazier-Bunny-Rabbits.webp': (12 * mm, 150 * mm),
-        # 'http://localhost:3000/images/chess_table.png': (90 * mm, 90 * mm)
-    }
-
-    return image_positions.get(identifier, None)
 
 
 if __name__ == '__main__':
