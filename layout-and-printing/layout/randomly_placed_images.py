@@ -5,12 +5,44 @@ from reportlab.lib.units import cm, mm
 
 from sys import argv
 
+DOCUMENT_WIDTH = 210 * mm
+DOCUMENT_HEIGHT = 297 * mm
+
+MARGIN = 15
+# Because we want the document to have margins, the minimum X is not 0, it is 0 + margin
+# and so on
+MIN_X = MARGIN
+MIN_Y = MARGIN
+MAX_X = int(DOCUMENT_WIDTH - MARGIN)
+MAX_Y = int(DOCUMENT_HEIGHT - MARGIN)
+
+
 c = canvas.Canvas(f"play-pdfs/{randrange(0,10000)}.pdf", A4, 0)
 c.setLineWidth(.3)
 c.setFont('Helvetica', 12)
 
-# for i, event in enumerate(events):
-#     c.drawString(20, (i+1) * 50, str(event))
+
+def generate_random_image_position(width=None, height=None):
+    """
+    Generates a random x, y pair position for the image that is well-placed in
+    the document (all parts of the image will be inside the document,
+    including margins).
+    """
+    width = width or randrange(MIN_X, MAX_X)
+    height = height or randrange(MIN_Y, MAX_Y)
+
+    x = None
+    y = None
+
+    while x is None or y is None:
+        try:
+            x = randrange(MARGIN, int(MAX_X - width))
+            y = randrange(MARGIN, int(MAX_Y - height))
+        except ValueError:
+            width /= 2
+            height /= 2
+
+    return (x, y)
 
 
 image_paths = ["/Users/max/workspace/starsign-maximum-unit-3/temp-images/Screenshot 2022-11-07 at 21.47.55.png",
@@ -40,16 +72,6 @@ image_paths = ["/Users/max/workspace/starsign-maximum-unit-3/temp-images/Screens
                ]
 shuffle(image_paths)
 
-DOCUMENT_WIDTH = 210 * mm
-DOCUMENT_HEIGHT = 297 * mm
-
-MARGIN = 15
-# Because we want the document to have margins, the minimum X is not 0, it is 0 + margin
-# and so on
-MIN_X = MARGIN
-MIN_Y = MARGIN
-MAX_X = int(DOCUMENT_WIDTH - MARGIN)
-MAX_Y = int(DOCUMENT_HEIGHT - MARGIN)
 
 for image_path in image_paths[0:4]:
     width = randrange(MIN_X, MAX_X)
