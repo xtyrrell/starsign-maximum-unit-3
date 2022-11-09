@@ -46,3 +46,9 @@ To set this up
    ```
 
    TODO: Use `lp` to actually print
+
+# To add a new image in the website (to have printed)
+
+1. Add the image to /images (must have transparent background)
+2. Add it to a page (wrapped in an `a`). Give the `img` the `clickable` HTML class
+3. In `layout-and-printing/layout/generate_pdf.py` in `get_image_position()`, add an entry for its position. You may have to do some trial and error to find a position that works well.
