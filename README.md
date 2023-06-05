@@ -45,8 +45,6 @@ To set this up
    $ printing/watch-and-print-pdfs.sh
    ```
 
-   TODO: Use `lp` to actually print
-
 # To add a new image in the website (to have printed)
 
 1. Add the image to /images (must have transparent background)
