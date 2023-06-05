@@ -1,48 +1,51 @@
-from os import path
-from tempfile import gettempdir
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
+from reportlab.lib.utils import ImageReader
 
 from sys import argv
 
 import json
 
-from download_file import streaming_download_file
-
 from randomly_placed_images import generate_random_image_position
+
 
 IMAGE_WIDTH = 40 * mm
 IMAGE_HEIGHT = 40 * mm
 
 
-def draw_image_event(event):
-    url = event['content']
-    filename = event['datetime']
-
-    file_path = path.join(gettempdir(), filename)
-    image_path = streaming_download_file(url, file_path)
+def draw_image_element(data_url, c):
+    image = ImageReader(data_url)
 
     x, y = generate_random_image_position(IMAGE_WIDTH, IMAGE_HEIGHT)
 
-    c.drawImage(image=image_path, x=x, y=y, width=IMAGE_WIDTH,
+    c.drawImage(image=image, x=x, y=y, width=IMAGE_WIDTH,
                 height=IMAGE_HEIGHT, preserveAspectRatio=True,
                 mask='auto')
 
 
-if __name__ == '__main__':
-    events_filename = argv[1]
-    output_filename = argv[2]
+def draw_text_element(text, c):
+    x, y = generate_random_image_position(IMAGE_WIDTH * 3, IMAGE_HEIGHT)
 
-    with open(events_filename) as f:
-        events = json.load(f)
+    c.drawCentredString(x, y, text)
 
+
+def generate_pdf(items, output_filename):
     c = canvas.Canvas(output_filename, A4)
 
-    for i, event in enumerate(events):
-        if event['contentType'] == 'image':
-            draw_image_event(event)
-
-        # c.drawString(20, (i+1) * 50, str(event))
+    for i, element in enumerate(items):
+        if element['imageUrl']:
+            draw_image_element(element, c)
+        if element['text']:
+            draw_text_element(element, c)
 
     c.save()
+
+if __name__ == '__main__':
+    items_filename = argv[1]
+    output_filename = argv[2]
+
+    with open(items_filename) as f:
+        items = json.load(f)
+    
+    generate_pdf(items, output_filename)

@@ -3,3 +3,4 @@ temp-images
 old
 play-pdfs
 *.pdf
+__pycache__
