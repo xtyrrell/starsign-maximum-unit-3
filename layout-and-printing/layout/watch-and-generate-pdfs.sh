@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /Users/ruby/Documents/2022/VideoGame/code/layout-and-printing/layout
+cd layout-and-printing/layout
 
 echo $(dirname -- $0)
 

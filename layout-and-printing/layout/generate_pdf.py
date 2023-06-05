@@ -10,8 +10,11 @@ import json
 from randomly_placed_images import generate_random_image_position
 
 
-IMAGE_WIDTH = 40 * mm
-IMAGE_HEIGHT = 40 * mm
+IMAGE_WIDTH = 140 * mm
+IMAGE_HEIGHT = 140 * mm
+
+TEXT_WIDTH = 40 * mm
+TEXT_HEIGHT = 40 * mm
 
 
 def draw_image_element(data_url, c):
@@ -25,19 +28,19 @@ def draw_image_element(data_url, c):
 
 
 def draw_text_element(text, c):
-    x, y = generate_random_image_position(IMAGE_WIDTH * 3, IMAGE_HEIGHT)
+    x, y = generate_random_image_position(TEXT_WIDTH * 3, TEXT_HEIGHT)
 
-    c.drawCentredString(x, y, text)
+    c.drawString(x, y, text)
 
 
 def generate_pdf(items, output_filename):
     c = canvas.Canvas(output_filename, A4)
 
     for i, element in enumerate(items):
-        if element['imageUrl']:
-            draw_image_element(element, c)
-        if element['text']:
-            draw_text_element(element, c)
+        if element.get('imageUrl'):
+            draw_image_element(element['imageUrl'], c)
+        if element.get('text'):
+            draw_text_element(element['text'], c)
 
     c.save()
 
