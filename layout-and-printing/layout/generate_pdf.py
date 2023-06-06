@@ -94,7 +94,6 @@ def generate_pdf(items, output_filename):
     draw_scoring(c)
 
     c.save()
-    c.sa
 
 if __name__ == '__main__':
     items_filename = argv[1]
